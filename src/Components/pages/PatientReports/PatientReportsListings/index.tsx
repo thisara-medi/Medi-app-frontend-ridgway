@@ -40,6 +40,7 @@ const columns = [
   {
     title: "Medical Record",
     dataIndex: "fiepath",
+    render: (text: string) => <a href={text}>Download file</a>,
   },
   {
     title: "Diagnosis",
