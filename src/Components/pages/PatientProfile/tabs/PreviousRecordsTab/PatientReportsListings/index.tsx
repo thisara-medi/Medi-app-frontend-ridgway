@@ -13,77 +13,36 @@ type ListingPropTypes = {
 
 const columns = [
   {
-    title: "Patient Type",
-    dataIndex: "patientType",
+    title: "Ward Number",
+    dataIndex: "wardNumber",
   },
   {
     title: "BHT number ",
     dataIndex: "bhtNumber",
   },
   {
-    title: "Reason",
-    dataIndex: "reasonId",
+    title: "Background",
+    dataIndex: "background",
   },
   {
-    title: "Surgery",
-    dataIndex: "surgery",
+    title: "Diagnosis",
+    dataIndex: "diagnosis",
   },
   {
-    title: "Indication for the surgery",
-    dataIndex: "indicationForTheSurgery",
+    title: "investigations",
+    dataIndex: "investigations",
   },
   {
-    title: "Indication for Admission to ICU",
-    dataIndex: "IndicationForAdmissionToTheICU",
+    title: "treatments",
+    dataIndex: "treatments",
   },
   {
-    title: "Tranexamic Acid Given",
-    dataIndex: "TranexamicAcidGivenOrNot",
+    title: "plan",
+    dataIndex: "plan",
   },
-  {
-    title: "Pre-opBP_mmHg",
-    dataIndex: "Pre_opBP_mmHg",
-  },
-  {
-    title: "Pre-opHR_bpm",
-    dataIndex: "Pre_opHR_bpm",
-  },
-  {
-    title: "Pre-opRR_bpm",
-    dataIndex: "Pre_opRR_bpm",
-  },
-  {
-    title: "Pre-opBloodUrea_mg_dL",
-    dataIndex: "Pre_opBloodUrea_mg_dL",
-  },
-  {
-    title: "Pre-opNa",
-    dataIndex: "Pre_opNa",
-  },
-  {
-    title: "Pre-opK",
-    dataIndex: "Pre_opK",
-  },
-  {
-    title: "Pre-opSCcreatinine",
-    dataIndex: "Pre_opSCcreatinine",
-  },
-  {
-    title: "Pre-opHB_g_dL",
-    dataIndex: "Pre_opHB_g_dL",
-  },
+  
 ];
 
-function patientType(typeId: any) {
-  switch (typeId) {
-    case 0:
-      return "Public";
-    case 1:
-      return "Private";
-    case 2:
-      return "Navaloka";
-  }
-}
 
 const PatientReportsListing = (props: ListingPropTypes) => {
   const { id } = useParams();
@@ -109,24 +68,15 @@ const PatientReportsListing = (props: ListingPropTypes) => {
           if (existingIndex === -1) {
             tempData.push({
               key: record.patientMedicalRecordID,
-              patientType: patientType(record.patientTypeID),
+              wardNumber: record.wardNumber,
               bhtNumber: record.bhtNumber,
-              reasonId: record.reasonId,
-              surgery: record.surgery,
-              indicationForTheSurgery: record.indicationForTheSurgery, //TODO : replace this
-              IndicationForAdmissionToTheICU:
-                record.indicationForAdmissionToTheICU,
-              TranexamicAcidGivenOrNot: record.tranexamicAcidGivenOrNot
-                ? "Yes"
-                : "No",
-              Pre_opBP_mmHg: record.preOpBP_mmHg,
-              Pre_opHR_bpm: record.preOpHR_bpm,
-              Pre_opRR_bpm: record.preOpRR_bpm,
-              Pre_opBloodUrea_mg_dL: record.preOpBloodUrea_mg_dL,
-              Pre_opNa: record.preOpNa,
-              Pre_opK: record.preOpK,
-              Pre_opSCcreatinine: record.preOpSCcreatinine,
-              Pre_opHB_g_dL: record.preOpHB_g_dL,
+              Background: record.Background,
+              diagnosis: record.diagnosis,
+              investigations: record.investigations, //TODO : replace this
+              treatments:
+                record.treatments,
+                plan: record.plan,
+              
             });
           }
         });

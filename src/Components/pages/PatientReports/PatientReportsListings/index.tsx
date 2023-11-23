@@ -26,24 +26,24 @@ const columns = [
     dataIndex: "name",
   },
   {
-    title: "Patient Type",
-    dataIndex: "patientType",
+    title: "Ward Number",
+    dataIndex: "wardNumber",
   },
   {
-    title: "Patient Classification",
-    dataIndex: "patientClassification",
+    title: "Background",
+    dataIndex: "background",
   },
   {
     title: "BHT number ",
     dataIndex: "bhtNumber",
   },
   {
-    title: "Surgery",
-    dataIndex: "surgery",
+    title: "Medical Record",
+    dataIndex: "fiepath",
   },
   {
-    title: "Indication for the surgery",
-    dataIndex: "indicationForTheSurgery",
+    title: "Diagnosis",
+    dataIndex: "diagnosis",
   },
   {
     title: "Indication for admission to the ICU",
@@ -97,11 +97,11 @@ const PatientReportsListing = (props: ListingPropTypes) => {
             key: record.patientMedicalRecordID,
             dateAndTime: getRandomDate(),
             name: `${record.patientProfile?.firstName} ${record.patientProfile?.lastName}`,
-            patientClassification: record.patientCategories,
+            wardNumber: record.wardNumber,
             bhtNumber: record.bhtNumber,
-            surgery: record.surgery,
-            indicationForTheSurgery: record.indicationForAdmissionToTheICU,
-            IndicationForAddmisionToIcu: record.indicationForAdmissionToTheICU,
+            background: record.background,
+            diagnosis: record.diagnosis,
+            fiepath: record.fiepath,
           });
         });
 
@@ -142,11 +142,11 @@ const PatientReportsListing = (props: ListingPropTypes) => {
             key: record.patientMedicalRecordID,
             dateAndTime: getRandomDate(),
             name: `${record.patientProfile?.firstName} ${record.patientProfile?.lastName}`,
-            patientClassification: record.patientCategories,
+            wardNumber: record.wardNumber,
             bhtNumber: record.bhtNumber,
-            surgery: record.surgery,
-            indicationForTheSurgery: record.indicationForAdmissionToTheICU,
-            IndicationForAddmisionToIcu: record.indicationForAdmissionToTheICU,
+            background: record.background,
+            diagnosis: record.diagnosis,
+            fiepath: record.fiepath,
           });
         });
 

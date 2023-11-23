@@ -24,6 +24,7 @@ export type RecordData = {
   specialRemarks?: string | null;
   fiepath?: string | null;
   createdDate?: string | null;
+  patientProfile? : Patient | null;
   }
 
   export type Reasons = {
