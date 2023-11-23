@@ -13,64 +13,36 @@ type ListingPropTypes = {
 
 const columns = [
   {
-    title: "Patient Type",
-    dataIndex: "patientType",
+    title: "Ward Number",
+    dataIndex: "WardNumber",
   },
   {
     title: "BHT number ",
     dataIndex: "bhtNumber",
   },
   {
-    title: "Reason",
-    dataIndex: "reasonId",
+    title: "Background",
+    dataIndex: "background",
   },
   {
-    title: "Surgery",
-    dataIndex: "surgery",
+    title: "Diagnosis",
+    dataIndex: "diagnosis",
   },
   {
-    title: "Indication for the surgery",
-    dataIndex: "indicationForTheSurgery",
+    title: "investigations",
+    dataIndex: "investigations",
   },
   {
-    title: "Indication for Admission to ICU",
-    dataIndex: "IndicationForAdmissionToTheICU",
+    title: "treatments",
+    dataIndex: "treatments",
   },
   {
-    title: "Tranexamic Acid Given",
-    dataIndex: "TranexamicAcidGivenOrNot",
+    title: "plan",
+    dataIndex: "plan",
   },
   {
     title: "Pre-opBP_mmHg",
     dataIndex: "Pre_opBP_mmHg",
-  },
-  {
-    title: "Pre-opHR_bpm",
-    dataIndex: "Pre_opHR_bpm",
-  },
-  {
-    title: "Pre-opRR_bpm",
-    dataIndex: "Pre_opRR_bpm",
-  },
-  {
-    title: "Pre-opBloodUrea_mg_dL",
-    dataIndex: "Pre_opBloodUrea_mg_dL",
-  },
-  {
-    title: "Pre-opNa",
-    dataIndex: "Pre_opNa",
-  },
-  {
-    title: "Pre-opK",
-    dataIndex: "Pre_opK",
-  },
-  {
-    title: "Pre-opSCcreatinine",
-    dataIndex: "Pre_opSCcreatinine",
-  },
-  {
-    title: "Pre-opHB_g_dL",
-    dataIndex: "Pre_opHB_g_dL",
   },
 ];
 
@@ -109,16 +81,13 @@ const PatientReportsListing = (props: ListingPropTypes) => {
           if (existingIndex === -1) {
             tempData.push({
               key: record.patientMedicalRecordID,
-              patientType: patientType(record.patientTypeID),
+              WardNumber: record.WardNumber,
               bhtNumber: record.bhtNumber,
-              reasonId: record.reasonId,
-              surgery: record.surgery,
-              indicationForTheSurgery: record.indicationForTheSurgery, //TODO : replace this
-              IndicationForAdmissionToTheICU:
-                record.indicationForAdmissionToTheICU,
-              TranexamicAcidGivenOrNot: record.tranexamicAcidGivenOrNot
-                ? "Yes"
-                : "No",
+              Background: record.Background,
+              diagnosis: record.diagnosis,
+              investigations: record.investigations, //TODO : replace this
+              treatments:
+                record.treatments,
               Pre_opBP_mmHg: record.preOpBP_mmHg,
               Pre_opHR_bpm: record.preOpHR_bpm,
               Pre_opRR_bpm: record.preOpRR_bpm,
