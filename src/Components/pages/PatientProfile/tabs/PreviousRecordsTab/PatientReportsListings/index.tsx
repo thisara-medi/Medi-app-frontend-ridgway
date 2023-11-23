@@ -14,7 +14,7 @@ type ListingPropTypes = {
 const columns = [
   {
     title: "Ward Number",
-    dataIndex: "WardNumber",
+    dataIndex: "wardNumber",
   },
   {
     title: "BHT number ",
@@ -40,22 +40,9 @@ const columns = [
     title: "plan",
     dataIndex: "plan",
   },
-  {
-    title: "Pre-opBP_mmHg",
-    dataIndex: "Pre_opBP_mmHg",
-  },
+  
 ];
 
-function patientType(typeId: any) {
-  switch (typeId) {
-    case 0:
-      return "Public";
-    case 1:
-      return "Private";
-    case 2:
-      return "Navaloka";
-  }
-}
 
 const PatientReportsListing = (props: ListingPropTypes) => {
   const { id } = useParams();
@@ -81,21 +68,15 @@ const PatientReportsListing = (props: ListingPropTypes) => {
           if (existingIndex === -1) {
             tempData.push({
               key: record.patientMedicalRecordID,
-              WardNumber: record.WardNumber,
+              wardNumber: record.wardNumber,
               bhtNumber: record.bhtNumber,
               Background: record.Background,
               diagnosis: record.diagnosis,
               investigations: record.investigations, //TODO : replace this
               treatments:
                 record.treatments,
-              Pre_opBP_mmHg: record.preOpBP_mmHg,
-              Pre_opHR_bpm: record.preOpHR_bpm,
-              Pre_opRR_bpm: record.preOpRR_bpm,
-              Pre_opBloodUrea_mg_dL: record.preOpBloodUrea_mg_dL,
-              Pre_opNa: record.preOpNa,
-              Pre_opK: record.preOpK,
-              Pre_opSCcreatinine: record.preOpSCcreatinine,
-              Pre_opHB_g_dL: record.preOpHB_g_dL,
+                plan: record.plan,
+              
             });
           }
         });
