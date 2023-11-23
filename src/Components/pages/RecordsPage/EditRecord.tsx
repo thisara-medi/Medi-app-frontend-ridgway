@@ -922,10 +922,7 @@ function EditRecord(initialFormData: RecordData) {
                         labelAlign="left"
                         colon={false}
                       >
-                        <DatePicker
-                          style={{ width: "100%" }}
-                          placeholder={String(record.dateofSurgery)!}
-                        />
+                        <DatePicker style={{ width: "100%" }} />
                       </Form.Item>
                     </Col>
                   </Row>

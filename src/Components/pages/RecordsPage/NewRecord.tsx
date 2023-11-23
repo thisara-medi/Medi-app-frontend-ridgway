@@ -67,28 +67,6 @@ function NewRecord(initialFormData: RecordData) {
                 <Form name="PersonalInfomation" layout="vertical" form={form}>
                   <h4>Treatment Infomation</h4>
                   <Row>
-                    <Col md={12}>
-                      <Form.Item
-                        label="Patient Type"
-                        name="patientTypeID"
-                        labelCol={{ style: formItemLabelStyle }}
-                        wrapperCol={{ style: { width: "96%" } }}
-                        labelAlign="left"
-                        colon={false}
-                      >
-                        <Select placeholder="please enter patient type">
-                          <Option key={"Public"} value="0">
-                            Public
-                          </Option>
-                          <Option key={"Private"} value="1">
-                            Private
-                          </Option>
-                          <Option key={"Nawaloka"} value="2">
-                            Navaloka
-                          </Option>
-                        </Select>
-                      </Form.Item>
-                    </Col>
                     {/* <Col md={12}>
                       <Form.Item
                         label="Patient Classification"
