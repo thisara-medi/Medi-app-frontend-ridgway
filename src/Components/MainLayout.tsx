@@ -29,7 +29,7 @@ function MainLayout() {
           <img
             src={PmsLogo}
             alt="React Icon"
-            style={{ width: "100%", padding: 12 }}
+            style={{ width: "90%", padding: 12 }}
           />
         </a>
         <Menu
