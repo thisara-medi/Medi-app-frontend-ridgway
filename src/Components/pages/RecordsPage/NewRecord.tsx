@@ -14,8 +14,10 @@ import {
   useRecordsStore,
   RecordData,
 } from "../../../stores/PatientRecordStore";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { storage } from "../../../lib/FirebaseService";
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const formItemLabelStyle: React.CSSProperties = {
   padding: 0,
@@ -31,6 +33,7 @@ function NewRecord(initialFormData: RecordData) {
   const [form] = Form.useForm();
   const { patientId } = useParams();
   const navigate = useNavigate();
+  const [file, setFile] = useState<File | null>(null);
 
   React.useEffect(() => {
     if (initialFormData) {
@@ -39,21 +42,35 @@ function NewRecord(initialFormData: RecordData) {
   }, [initialFormData, form]);
 
   const handleSaveRecord = async () => {
-    try {
-      const values = await form.validateFields();
-      values.patientProfileID = Number(patientId);
-      // values.patientTypeID = 1;
-      console.log(values);
-      await recordsStore.addThunk(values);
-      navigate(-1);
-      notification.success({
-        message: "Record Added successfully",
-        description: "The Record has been successfully added.",
+    if (file != null) {
+      const storageRef = ref(storage, `/files/${file.name}`)
+
+      uploadBytes(storageRef, file).then((snapshot) => {
+
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+          console.log('File available at', downloadURL);
+          try {
+            const values = await form.validateFields();
+            values.patientProfileID = Number(patientId);
+            values.fiepath = downloadURL;
+
+            // values.patientTypeID = 1;
+            console.log(values);
+            await recordsStore.addThunk(values);
+            navigate(-1);
+            notification.success({
+              message: "Record Added successfully",
+              description: "The Record has been successfully added.",
+            });
+            form.resetFields();
+          } catch (error) {
+            console.error("Error saving record:", error);
+            alert("Error: failed to add the record");
+          }
+        });
+      }).catch((error) => {
+        console.error('Error uploading file:', error.message);
       });
-      form.resetFields();
-    } catch (error) {
-      console.error("Error saving record:", error);
-      alert("Error: failed to add the record");
     }
   };
 
@@ -169,6 +186,15 @@ function NewRecord(initialFormData: RecordData) {
                       >
                         <Input />
                       </Form.Item>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md={24}>
+                      <input type="file" onChange={(e) => {
+                        if (e.target.files != null) {
+                          setFile(e.target.files[0]);
+                        }
+                      }} />
                     </Col>
                   </Row>
                   <Row>
