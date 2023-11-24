@@ -93,7 +93,7 @@ console.log(snapshot);
             values.patientTypeID = Number(values.patientTypeID);
             values.fiepath = downloadURL;
             await recordsStore.updateThunk(values);
-            navigate('/');
+            navigate('/patient-reports');
             notification.success({
               message: "Record updated successfully",
               description: "The Record has been successfully updated.",
