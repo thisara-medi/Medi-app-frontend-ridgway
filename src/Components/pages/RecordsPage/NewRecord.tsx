@@ -56,7 +56,7 @@ console.log(snapshot);
             // values.patientTypeID = 1;
             console.log(values);
             await recordsStore.addThunk(values);
-            navigate('/');
+            navigate(-2);
             notification.success({
               message: "Record Added successfully",
               description: "The Record has been successfully added.",
