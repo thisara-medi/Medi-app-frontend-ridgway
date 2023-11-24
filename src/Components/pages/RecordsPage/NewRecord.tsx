@@ -57,7 +57,7 @@ function NewRecord(initialFormData: RecordData) {
             // values.patientTypeID = 1;
             console.log(values);
             await recordsStore.addThunk(values);
-            navigate(-1);
+            navigate(-2);
             notification.success({
               message: "Record Added successfully",
               description: "The Record has been successfully added.",

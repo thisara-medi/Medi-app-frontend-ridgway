@@ -97,7 +97,7 @@ function EditRecord(initialFormData: RecordData) {
             values.patientTypeID = Number(values.patientTypeID);
             values.fiepath = downloadURL;
             await recordsStore.updateThunk(values);
-            navigate(-1);
+            navigate('-1');
             notification.success({
               message: "Record updated successfully",
               description: "The Record has been successfully updated.",
