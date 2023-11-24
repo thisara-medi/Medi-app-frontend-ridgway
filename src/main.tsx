@@ -8,7 +8,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <ConfigProvider
     theme={{
       token: {
-        colorPrimary: "#20BEB8",
+        colorPrimary: "#5dafdb",
       },
     }}
   >
