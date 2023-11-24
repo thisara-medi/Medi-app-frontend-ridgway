@@ -3,9 +3,7 @@ import {
   Col,
   Input,
   Row,
-  DatePicker,
   Button,
-  Switch,
   Select,
   Card,
   notification,
@@ -16,9 +14,7 @@ import {
   RecordData,
 } from "../../../stores/PatientRecordStore";
 import React, { useEffect, useState } from "react";
-import { PatientType } from "../../../enums/patientTypeEnum";
 import { useNavigate, useParams } from "react-router-dom";
-import moment from "moment";
 import { storage } from "../../../lib/FirebaseService";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
@@ -36,10 +32,10 @@ function EditRecord(initialFormData: RecordData) {
   const [form] = Form.useForm();
   const { patientId, recordId } = useParams();
   const { getRecordByRecordIdThunk } = useRecordsStore();
-  const [record, setRecord] = useState<Partial<RecordData>>({});
+  const [, setRecord] = useState<Partial<RecordData>>({});
   const navigate = useNavigate();
   const [file, setFile] = useState<File | null>(null);
-
+console.log(Option);
   useEffect(() => {
     let getData = async () => {
       try {
@@ -85,7 +81,7 @@ function EditRecord(initialFormData: RecordData) {
       const storageRef = ref(storage, `/files/${file.name}`)
 
       uploadBytes(storageRef, file).then((snapshot) => {
-
+console.log(snapshot);
         getDownloadURL(storageRef).then(async (downloadURL) => {
           console.log('File available at', downloadURL);
 

@@ -3,9 +3,7 @@ import {
   Col,
   Input,
   Row,
-  DatePicker,
   Button,
-  Switch,
   Select,
   Card,
   notification,
@@ -35,6 +33,7 @@ function NewRecord(initialFormData: RecordData) {
   const navigate = useNavigate();
   const [file, setFile] = useState<File | null>(null);
 
+  console.log(Option);
   React.useEffect(() => {
     if (initialFormData) {
       form.setFieldsValue(initialFormData);
@@ -46,7 +45,7 @@ function NewRecord(initialFormData: RecordData) {
       const storageRef = ref(storage, `/files/${file.name}`)
 
       uploadBytes(storageRef, file).then((snapshot) => {
-
+console.log(snapshot);
         getDownloadURL(storageRef).then(async (downloadURL) => {
           console.log('File available at', downloadURL);
           try {

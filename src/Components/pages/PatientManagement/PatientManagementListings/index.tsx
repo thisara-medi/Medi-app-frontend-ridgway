@@ -63,7 +63,7 @@ const actionButtonsArr = [
 ];
 
 const patientManagementListing = (props: ListingPropTypes) => {
-  const { patients, getThunk } = usePatientsStore();
+  const { getThunk } = usePatientsStore();
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const tempData: any = [];
