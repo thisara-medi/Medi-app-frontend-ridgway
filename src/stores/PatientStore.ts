@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import {
   addPatient,
+  getAllPatientsBySearch,
   getPatientById,
   getPatients,
   removePatient,
@@ -12,22 +13,20 @@ export type Patient = {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
-  gender: string; 
-  contactNumber: number;
+  gender: string;
+  contactNumber: string;
   address: string;
-  emergencyContactNo: number;
-  bloodGroup: string; 
+  emergencyContactNo: string;
+  bloodGroup: string;
   medicalHistory: string;
   allergic: string;
   nic: string;
   insuranceInfomation: string;
+  isActive: boolean;
 };
 
-
-
-
 type PatientStore = {
-  patients: Patient[]; // Patients 
+  patients: Patient[]; // Patients
   addAction: (patient: any) => void; // Actions to update state
   removeAction: (id: number) => void; // Actions to update state
   removeAllAction: () => void; // Actions to update state
@@ -38,7 +37,14 @@ type PatientStore = {
   removeByIdThunk: (id: number) => any; // Thunk to make async calls to API endpoints
 };
 
-
+type PatientStoreSearch = {
+  patientsSearch: Patient[];
+  getAllPatientsBySearchThunk: (
+    searchString: string,
+    searchType: number
+  ) => any;
+  removeAllAction: () => void;
+};
 
 export const usePatientsStore = create<PatientStore>((set) => ({
   patients: [],
@@ -92,4 +98,19 @@ export const usePatientsStore = create<PatientStore>((set) => ({
   },
 }));
 
+export const usePatientStoreSearch = create<PatientStoreSearch>((set) => ({
+  patientsSearch: [],
+  getAllPatientsBySearchThunk: async (
+    searchString: string,
+    searchType: number
+  ) => {
+    try {
+      let resp = await getAllPatientsBySearch(searchString, searchType);
+      return resp?.data;
+    } catch (e) {
+      return e;
+    }
+  },
 
+  removeAllAction: () => set(() => ({ patientsSearch: [] })),
+}));
