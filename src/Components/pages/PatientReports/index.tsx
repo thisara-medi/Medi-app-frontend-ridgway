@@ -3,6 +3,8 @@ import PatientReportsListings from "./PatientReportsListings";
 import ReportSummeryCard from "../../custom-components/ReportSummeryCard";
 import { useState } from "react";
 import type { SearchProps } from "antd/es/input";
+import RecordSearchParamsDto from "../../../stores/RecordSearchParamsDto";
+import { GetFile } from "../../../lib/PatientRecordService";
 
 const { Search } = Input;
 const { RangePicker } = DatePicker;
@@ -10,48 +12,40 @@ const { RangePicker } = DatePicker;
 function PatientReports() {
   const [name, setName] = useState("");
   // const { records, getAllRecordsByNameThunk } = useRecordsStore();
-  // const [reason, setReason] = useState("");
+  //const [id, setid] = useState("");
 
   const onSearchName: SearchProps["onSearch"] = (value, _e) => setName(value);
+  // const onSearchid: SearchProps["onSearch"] = (value, _e) => setid(value);
   // const onSearchReason: SearchProps['onSearch'] = (value, _e) => setReason(value);
 
   console.log(name);
+  //console.log(id);
+  const exportRecordsAsCSV = async () => {
+    try {
+      // Assuming you have the search parameters (name, reason, patientType) available in your component's state
+      const params: RecordSearchParamsDto = {
+        searchstring: name.toString(),
+      };
+
+      // Make the API call with the search parameters
+      const response = await GetFile(params);
+
+      // Rest of the code to create and download the file
+      const blob = new Blob([response.data], { type: "text/csv" });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "patient_records.csv";
+      a.click();
+    } catch (error) {
+      console.error("Error exporting records as CSV:", error);
+    }
+  };
 
   return (
     <div style={{ padding: 15 }}>
       <h3 style={{ color: "black" }}>Patient Reports</h3>
-      <div>
-        <Row style={{ marginBottom: 15 }}>
-          <Col md={6} style={{ padding: 10 }}>
-            <ReportSummeryCard
-              name="Patients Total"
-              value="11.9M"
-              increment="+2.5%"
-            />
-          </Col>
-          <Col md={6} style={{ padding: 10 }}>
-            <ReportSummeryCard
-              name="New This Week"
-              value="8.236K"
-              increment="+1.2%"
-            />
-          </Col>
-          <Col md={6} style={{ padding: 10 }}>
-            <ReportSummeryCard
-              name="New Patients Today"
-              value="8K"
-              increment="+5.2%"
-            />
-          </Col>
-          <Col md={6} style={{ padding: 10 }}>
-            <ReportSummeryCard
-              name="Active Patients"
-              value="2.352M"
-              increment="+11%"
-            />
-          </Col>
-        </Row>
-      </div>
+
       <Card bordered={false}>
         <div
           style={{
@@ -68,11 +62,6 @@ function PatientReports() {
               // onChange={(e) => setInput(e.target.value)}
               onSearch={onSearchName}
             />
-            <Search
-              placeholder="Search by Reason"
-              style={{ width: 200 }}
-              // onSearch={onSearchReason}
-            />
             <RangePicker />
           </div>
           <div
@@ -87,6 +76,7 @@ function PatientReports() {
               type="primary"
               ghost
               style={{ marginRight: 5 }}
+              onClick={exportRecordsAsCSV}
             >
               Export
             </Button>

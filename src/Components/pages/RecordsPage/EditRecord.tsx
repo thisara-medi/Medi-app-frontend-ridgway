@@ -20,7 +20,7 @@ import { PatientType } from "../../../enums/patientTypeEnum";
 import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 import { storage } from "../../../lib/FirebaseService";
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -82,35 +82,36 @@ function EditRecord(initialFormData: RecordData) {
 
   const handleUpdateRecord = async () => {
     if (file != null) {
-      const storageRef = ref(storage, `/files/${file.name}`)
+      const storageRef = ref(storage, `/files/${file.name}`);
 
-      uploadBytes(storageRef, file).then((snapshot) => {
+      uploadBytes(storageRef, file)
+        .then((snapshot) => {
+          getDownloadURL(storageRef).then(async (downloadURL) => {
+            console.log("File available at", downloadURL);
 
-        getDownloadURL(storageRef).then(async (downloadURL) => {
-          console.log('File available at', downloadURL);
-
-          try {
-            const values = await form.validateFields();
-            // Call the updateThunk method from the Zustand store to update the record
-            values.patientProfileID = patientId;
-            values.patientMedicalRecordID = Number(recordId);
-            values.patientTypeID = Number(values.patientTypeID);
-            values.fiepath = downloadURL;
-            await recordsStore.updateThunk(values);
-            navigate(-1);
-            notification.success({
-              message: "Record updated successfully",
-              description: "The Record has been successfully updated.",
-            });
-          } catch (error) {
-            console.error("Error updating record:", error);
-          }
+            try {
+              const values = await form.validateFields();
+              // Call the updateThunk method from the Zustand store to update the record
+              values.patientProfileID = patientId;
+              values.patientMedicalRecordID = Number(recordId);
+              values.patientTypeID = Number(values.patientTypeID);
+              values.fiepath = downloadURL;
+              values.createdDate = new Date().toISOString();
+              await recordsStore.updateThunk(values);
+              //navigate("patient-Management");
+              notification.success({
+                message: "Record updated successfully",
+                description: "The Record has been successfully updated.",
+              });
+            } catch (error) {
+              console.error("Error updating record:", error);
+            }
+          });
+        })
+        .catch((error) => {
+          console.error("Error uploading file:", error.message);
         });
-      }).catch((error) => {
-        console.error('Error uploading file:', error.message);
-      });
     }
-
   };
 
   return (
@@ -229,11 +230,14 @@ function EditRecord(initialFormData: RecordData) {
                   </Row>
                   <Row>
                     <Col md={24}>
-                      <input type="file" onChange={(e) => {
-                        if (e.target.files != null) {
-                          setFile(e.target.files[0]);
-                        }
-                      }} />
+                      <input
+                        type="file"
+                        onChange={(e) => {
+                          if (e.target.files != null) {
+                            setFile(e.target.files[0]);
+                          }
+                        }}
+                      />
                     </Col>
                   </Row>
                   <Row>

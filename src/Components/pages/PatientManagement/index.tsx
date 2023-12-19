@@ -1,9 +1,26 @@
-import { Card, Button} from "antd";
+import { Card, Button, Input, Select } from "antd";
 import PatientManagementListing from "./PatientManagementListings";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { SearchProps } from "antd/es/input";
+
+const { Search } = Input;
+const { Option } = Select;
 
 function PatientManagement() {
   const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [searchType, setSearchType] = useState(0);
+
+  const selectAfter = (
+    <Select defaultValue="0" onChange={(value) => setSearchType(Number(value))}>
+      <Option value="0">Name</Option>
+      <Option value="1">Contact No:</Option>
+      <Option value="2">NIC</Option>
+    </Select>
+  );
+
+  const onSearchName: SearchProps["onSearch"] = (value, _e) => setName(value);
 
   return (
     <div style={{ padding: 15 }}>
@@ -18,7 +35,12 @@ function PatientManagement() {
             padding: 10,
           }}
         >
-          {/* <Search placeholder="Search by Name/ID/NIC" style={{ width: 200 }} /> */}
+          <Search
+            placeholder="Search"
+            addonBefore={selectAfter}
+            style={{ width: 250, justifyContent: "flex-start" }}
+            onSearch={onSearchName}
+          />
           <div
             style={{
               display: "flex",
@@ -29,13 +51,13 @@ function PatientManagement() {
             <Button
               size="middle"
               type="primary"
-              onClick={() => navigate("patient-registration")}
+              onClick={() => navigate("/patient-registration")}
             >
               Register New Patient
             </Button>
           </div>
         </div>
-        <PatientManagementListing />
+        <PatientManagementListing searchParam={name} searchIndex={searchType} />
       </Card>
     </div>
   );
