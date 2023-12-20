@@ -40,21 +40,27 @@ function MainLayout() {
             {
               key: "1",
               icon: <UserOutlined />,
-              label: "Patient Management",
+              label: "Dashboard",
               onClick: () => navigate("/"),
             },
             {
               key: "2",
+              icon: <UserOutlined />,
+              label: "Patient Management",
+              onClick: () => navigate("/PatientManagement"),
+            },
+            {
+              key: "3",
               icon: <QuestionCircleOutlined />,
               label: "Patient Reports",
               onClick: () => navigate("/patient-reports"),
             },
-            {
-              key: "3",
-              icon: <SettingOutlined />,
-              label: "Settings",
-              onClick: () => navigate("/settings"), // TODO: Once settings page is ready, route will work
-            },
+            // {
+            //   key: "4",
+            //   icon: <SettingOutlined />,
+            //   label: "Settings",
+            //   onClick: () => navigate("/settings"), // TODO: Once settings page is ready, route will work
+            // },
           ]}
         />
       </Sider>

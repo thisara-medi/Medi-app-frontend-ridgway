@@ -7,20 +7,20 @@ import PatientProfile from "./Components/pages/PatientProfile";
 import EditRecord from "./Components/pages/RecordsPage/EditRecord";
 import NewRecord from "./Components/pages/RecordsPage/NewRecord";
 import LoginPage from "./Components/LoginPage";
+import Dashboard from "./Components/pages/dashboard/dashboard";
 // import { useAuthStore } from "./stores/AuthStore";
 
 function App() {
-  
-  /** 
-   * Temporary disabled isAuthenticated check to persist logged in 
+  /**
+   * Temporary disabled isAuthenticated check to persist logged in
    * status during page refreshes. Refreshing the page resets the store
-   * along with isAuthenticated value, which navigates the user back to 
+   * along with isAuthenticated value, which navigates the user back to
    * login page.
-   * 
+   *
    * TODO: Implement token validation in server-side to allow only requests with valid tokens.
-   * 
+   *
    */
-  // const { isAuthenticated } = useAuthStore(); 
+  // const { isAuthenticated } = useAuthStore();
   const ProtectedRoute = ({ children }: any) => {
     if (localStorage.getItem("token") == null) {
       return <Navigate to="/login" replace />;
@@ -42,7 +42,8 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route path="/" element={<PatientManagement />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/PatientManagement" element={<PatientManagement />} />
             <Route
               path="/patient-registration"
               element={<PatientRegistation />}
