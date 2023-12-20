@@ -26,6 +26,10 @@ const columns = [
     dataIndex: "name",
   },
   {
+    title: "ID",
+    dataIndex: "nic",
+  },
+  {
     title: "Ward Number",
     dataIndex: "wardNumber",
   },
@@ -40,15 +44,31 @@ const columns = [
   {
     title: "Medical Record",
     dataIndex: "fiepath",
-    render: (text: string) => <a href={text}>Download file</a>,
+    render: (text: any) =>
+      text ? (
+        <a href={text} target="_blank">
+          Download file
+        </a>
+      ) : (
+        ""
+      ),
+    // <a href={text}>Download file</a>
   },
   {
     title: "Diagnosis",
     dataIndex: "diagnosis",
   },
   {
-    title: "Indication for admission to the ICU",
-    dataIndex: "IndicationForAddmisionToIcu",
+    title: "investigation",
+    dataIndex: "investigation",
+  },
+  {
+    title: "Treatment",
+    dataIndex: "treatment",
+  },
+  {
+    title: "Plan",
+    dataIndex: "plan",
   },
 ];
 
@@ -96,13 +116,17 @@ const PatientReportsListing = (props: ListingPropTypes) => {
           // console.log(record)
           newData.push({
             key: record.patientMedicalRecordID,
-            dateAndTime: getRandomDate(),
+            dateAndTime: `${record.createdDate}`,
             name: `${record.patientProfile?.firstName} ${record.patientProfile?.lastName}`,
             wardNumber: record.wardNumber,
             bhtNumber: record.bhtNumber,
             background: record.background,
             diagnosis: record.diagnosis,
             fiepath: record.fiepath,
+            nic: record.patientProfile?.nic,
+            investigation: record.investigations,
+            treatment: record.treatments,
+            plan: record.plan,
           });
         });
 
@@ -138,16 +162,42 @@ const PatientReportsListing = (props: ListingPropTypes) => {
 
         const newData: any = [];
         recordsSearch.forEach((record) => {
+          const formatDob = () => {
+            if (record.createdDate) {
+              const datetimeString = String(record.createdDate);
+              const formattedDate = new Date(datetimeString)
+                .toISOString()
+                .split("T")[0];
+
+              const time = new Date(datetimeString).toLocaleTimeString(
+                "en-US",
+                {
+                  hour12: false,
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                }
+              );
+
+              return formattedDate + " " + time;
+            } else {
+              return "";
+            }
+          };
           // console.log(record)
           newData.push({
             key: record.patientMedicalRecordID,
-            dateAndTime: getRandomDate(),
+            dateAndTime: formatDob(),
             name: `${record.patientProfile?.firstName} ${record.patientProfile?.lastName}`,
             wardNumber: record.wardNumber,
             bhtNumber: record.bhtNumber,
             background: record.background,
             diagnosis: record.diagnosis,
             fiepath: record.fiepath,
+            nic: record.patientProfile?.nic,
+            investigation: record.investigations,
+            treatment: record.treatments,
+            plan: record.plan,
           });
         });
 

@@ -11,11 +11,14 @@ import {
 import {
   useRecordsStore,
   RecordData,
+  useReasonsStore,
+  Reasons,
 } from "../../../stores/PatientRecordStore";
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../lib/FirebaseService";
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import TextArea from "antd/es/input/TextArea";
 
 const formItemLabelStyle: React.CSSProperties = {
   padding: 0,
@@ -24,16 +27,34 @@ const formItemLabelStyle: React.CSSProperties = {
 };
 
 const { Option } = Select;
-const { TextArea } = Input;
 
 function NewRecord(initialFormData: RecordData) {
   const recordsStore = useRecordsStore();
+  const { getReasonsThunk } = useReasonsStore();
+  const [reasonList, setReasonList] = useState<Reasons[]>();
   const [form] = Form.useForm();
   const { patientId } = useParams();
   const navigate = useNavigate();
   const [file, setFile] = useState<File | null>(null);
 
-  console.log(Option);
+  // Fetch reasons when the component mounts
+  React.useEffect(() => {
+    const fetchReasons = async () => {
+      try {
+        const apiResponse = await getReasonsThunk();
+        setReasonList(apiResponse);
+      } catch (error) {
+        console.error("Error fetching reasons:", error);
+      }
+    };
+
+    fetchReasons();
+  }, []);
+
+  // Extract reasons from the store
+  const reasons = reasonList;
+  console.log(reasons);
+
   React.useEffect(() => {
     if (initialFormData) {
       form.setFieldsValue(initialFormData);
@@ -42,34 +63,53 @@ function NewRecord(initialFormData: RecordData) {
 
   const handleSaveRecord = async () => {
     if (file != null) {
-      const storageRef = ref(storage, `/files/${file.name}`)
+      const storageRef = ref(storage, `/files/${file.name}`);
 
-      uploadBytes(storageRef, file).then((snapshot) => {
-console.log(snapshot);
-        getDownloadURL(storageRef).then(async (downloadURL) => {
-          console.log('File available at', downloadURL);
-          try {
-            const values = await form.validateFields();
-            values.patientProfileID = Number(patientId);
-            values.fiepath = downloadURL;
-
-            // values.patientTypeID = 1;
-            console.log(values);
-            await recordsStore.addThunk(values);
-            navigate(-2);
-            notification.success({
-              message: "Record Added successfully",
-              description: "The Record has been successfully added.",
-            });
-            form.resetFields();
-          } catch (error) {
-            console.error("Error saving record:", error);
-            alert("Error: failed to add the record");
-          }
+      uploadBytes(storageRef, file)
+        .then((snapshot) => {
+          getDownloadURL(storageRef).then(async (downloadURL) => {
+            console.log("File available at", downloadURL);
+            try {
+              const values = await form.validateFields();
+              values.patientProfileID = Number(patientId);
+              values.patientTypeID = Number(values.patientTypeID);
+              values.createdDate = new Date().toISOString();
+              values.medicalRecordUrl = downloadURL;
+              console.log(values);
+              await recordsStore.addThunk(values);
+              navigate("/PatientManagement");
+              notification.success({
+                message: "Record Added successfully",
+                description: "The Record has been successfully added.",
+              });
+              form.resetFields();
+            } catch (error) {
+              console.error("Error saving record:", error);
+              alert("Error: failed to add the record");
+            }
+          });
+        })
+        .catch((error) => {
+          console.error("Error uploading file:", error.message);
         });
-      }).catch((error) => {
-        console.error('Error uploading file:', error.message);
-      });
+    } else {
+      try {
+        const values = await form.validateFields();
+        values.patientProfileID = Number(patientId);
+        values.patientTypeID = Number(values.patientTypeID);
+        values.createdDate = new Date().toISOString();
+        console.log(values);
+        await recordsStore.addThunk(values);
+        navigate("/PatientManagement");
+        notification.success({
+          message: "Record Added successfully",
+          description: "The Record has been successfully added.",
+        });
+        form.resetFields();
+      } catch (error) {
+        console.error("Error saving record:", error);
+        alert("Error: failed to add the record");
+      }
     }
   };
 
@@ -92,6 +132,12 @@ console.log(snapshot);
                         wrapperCol={{ style: { width: "96%" } }}
                         labelAlign="left"
                         colon={false}
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please Enter BHT",
+                          },
+                        ]}
                       >
                         <Input />
                       </Form.Item>
@@ -189,11 +235,14 @@ console.log(snapshot);
                   </Row>
                   <Row>
                     <Col md={24}>
-                      <input type="file" onChange={(e) => {
-                        if (e.target.files != null) {
-                          setFile(e.target.files[0]);
-                        }
-                      }} />
+                      <input
+                        type="file"
+                        onChange={(e) => {
+                          if (e.target.files != null) {
+                            setFile(e.target.files[0]);
+                          }
+                        }}
+                      />
                     </Col>
                   </Row>
                   <Row>

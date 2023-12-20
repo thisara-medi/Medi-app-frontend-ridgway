@@ -2,11 +2,15 @@ import axios from "axios";
 import { Patient } from "../stores/PatientStore";
 
 export function getPatients() {
-  return axios.get<Patient[]>(`https://pms-endpoints-ridgway.azurewebsites.net/api/Patient/GetPatientList`);
+  return axios.get<Patient[]>(
+    `https://localhost:7160/api/Patient/GetPatientList`
+  );
 }
 
 export function getPatientById(id: number) {
-  return axios.get<Patient[]>(`https://pms-endpoints-ridgway.azurewebsites.net/api/Patient/GetPatientById/${id}`);
+  return axios.get<Patient[]>(
+    `https://localhost:7160/api/Patient/GetPatientById/${id}`
+  );
 }
 
 export function addPatient(patient: Patient) {
@@ -18,5 +22,13 @@ export function removePatient(id: number) {
 }
 
 export function updatePatient(patient: any) {
-  return axios.put(`https://pms-endpoints-ridgway.azurewebsites.net/api/Patient/UpdatePatient`, patient);
+  return axios.put(`https://localhost:7160/api/Patient/UpdatePatient`, patient);
+}
+export function getAllPatientsBySearch(
+  searchString: string,
+  searchType: number
+) {
+  return axios.get<Patient[]>(
+    `https://localhost:7160/api/Patient/GetPatientBySearchString/${searchString}/${searchType}`
+  );
 }
