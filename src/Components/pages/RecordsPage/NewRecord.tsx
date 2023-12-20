@@ -134,6 +134,12 @@ function NewRecord(initialFormData: RecordData) {
                         wrapperCol={{ style: { width: "96%" } }}
                         labelAlign="left"
                         colon={false}
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please Enter BHT",
+                          },
+                        ]}
                       >
                         <Input />
                       </Form.Item>

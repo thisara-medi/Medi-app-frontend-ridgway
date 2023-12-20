@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Space, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import _ from "lodash";
 import {
   RecordData,
   useRecordsStore,
 } from "../../../../../../stores/PatientRecordStore";
 import { useNavigate, useParams } from "react-router-dom";
+import { EditOutlined } from "@ant-design/icons";
 
 type ListingPropTypes = {
   headerComponent?: React.ReactNode;
 };
 
 const columns = [
+  {
+    title: "",
+    dataIndex: "edit",
+  },
   {
     title: "Ward Number",
     dataIndex: "wardNumber",
@@ -73,6 +78,19 @@ const PatientReportsListing = (props: ListingPropTypes) => {
               treatments: record.treatments,
               plan: record.plan,
               background: record.background,
+              edit: (
+                <Button
+                  size="small"
+                  onClick={() =>
+                    navigate(
+                      `/patient-profile/records/${id}/${record.patientMedicalRecordID}`
+                    )
+                  }
+                >
+                  <EditOutlined />
+                </Button>
+              ),
+            
             });
           }
         });

@@ -35,13 +35,14 @@ function PatientDetails() {
         DateOfBirth: values?.DateOfBirth,
         Gender: values?.Gender,
         nic: values?.nic,
-        ContactNumber: Number(values?.ContactNumber),
+        ContactNumber: values?.ContactNumber,
         Address: values?.address,
-        EmergencyContactNo: Number(values?.EmergencyContactNo),
+        EmergencyContactNo: values?.EmergencyContactNo,
         BloodGroup: values?.BloodGroup,
         insuranceInfomation: values?.insuranceInfomation,
         MedicalHistory: values?.MedicalHistory,
         Allergic: values?.Allergic,
+        isActive: values?.isActive
       });
       console.log("addedpatient");
       console.log(addedPatient);
