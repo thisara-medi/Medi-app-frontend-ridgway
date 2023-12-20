@@ -81,15 +81,16 @@ function BasicDetailsTab() {
       DateOfBirth: values?.DateOfBirth,
       Gender: values?.gender,
       nic: values?.nic,
-      ContactNumber: Number(values?.contactNumber),
+      ContactNumber: values?.contactNumber,
       Address: values?.address,
-      EmergencyContactNo: Number(values?.emergencyContactNo),
+      EmergencyContactNo: values?.emergencyContactNo,
       BloodGroup: values?.bloodGroup,
       insuranceInfomation: values?.insuranceInfomation,
       MedicalHistory: values?.medicalHistory,
       Allergic: values?.allergic,
+      isActive: values?.isActive
     });
-    navigate("/");
+    navigate("/patientManagement");
     notification.success({
       message: "Record Changed successfully",
       description: "The Record has been successfully changed.",
@@ -205,7 +206,7 @@ function BasicDetailsTab() {
                   <Col md={12}>
                     <Form.Item
                       label="Active Patient"
-                      name="activePatient"
+                      name="isActive"
                       labelCol={{ style: formItemLabelStyle }}
                       wrapperCol={{ style: { width: "96%" } }}
                       labelAlign="left"

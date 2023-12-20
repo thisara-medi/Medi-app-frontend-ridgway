@@ -189,7 +189,7 @@ function PatientDetails() {
                 <Col md={12}>
                   <Form.Item
                     label="Active Patient"
-                    name="activePatient"
+                    name="isActive"
                     labelCol={{ style: formItemLabelStyle }}
                     wrapperCol={{ style: { width: "96%" } }}
                     labelAlign="left"
