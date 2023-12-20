@@ -98,7 +98,7 @@ function EditRecord(initialFormData: RecordData) {
               }
               values.createdDate = new Date().toISOString();
               await recordsStore.updateThunk(values);
-              //navigate("patient-Management");
+              navigate("/");
               notification.success({
                 message: "Record updated successfully",
                 description: "The Record has been successfully updated.",
@@ -120,7 +120,7 @@ function EditRecord(initialFormData: RecordData) {
         values.patientProfileID = patientId;
         values.patientMedicalRecordID = Number(recordId);
         await recordsStore.updateThunk(values);
-        navigate(-1);
+        navigate("/");
         notification.success({
           message: "Record updated successfully",
           description: "The Record has been successfully updated.",
