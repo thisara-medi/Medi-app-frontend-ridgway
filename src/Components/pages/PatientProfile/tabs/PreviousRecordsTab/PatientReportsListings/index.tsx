@@ -40,9 +40,7 @@ const columns = [
     title: "plan",
     dataIndex: "plan",
   },
-  
 ];
-
 
 const PatientReportsListing = (props: ListingPropTypes) => {
   const { id } = useParams();
@@ -70,13 +68,11 @@ const PatientReportsListing = (props: ListingPropTypes) => {
               key: record.patientMedicalRecordID,
               wardNumber: record.wardNumber,
               bhtNumber: record.bhtNumber,
-              Background: record.Background,
               diagnosis: record.diagnosis,
               investigations: record.investigations, //TODO : replace this
-              treatments:
-                record.treatments,
-                plan: record.plan,
-              
+              treatments: record.treatments,
+              plan: record.plan,
+              background: record.background,
             });
           }
         });
