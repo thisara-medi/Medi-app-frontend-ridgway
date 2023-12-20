@@ -83,7 +83,7 @@ function getRandomDate() {
   return `${year}-${formattedMonth}-${formattedDay}`;
 }
 
-console.log(getRandomDate);
+console.log(getRandomDate+"");
 
 function getRandomNumberInRange(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
