@@ -2,7 +2,6 @@ import { useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  SettingOutlined,
   UserOutlined,
   QuestionCircleOutlined,
 } from "@ant-design/icons";

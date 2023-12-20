@@ -26,7 +26,7 @@ const formItemLabelStyle: React.CSSProperties = {
   whiteSpace: "initial",
 };
 
-const { Option } = Select;
+const { } = Select;
 
 function NewRecord(initialFormData: RecordData) {
   const recordsStore = useRecordsStore();
@@ -69,6 +69,7 @@ function NewRecord(initialFormData: RecordData) {
         .then((snapshot) => {
           getDownloadURL(storageRef).then(async (downloadURL) => {
             console.log("File available at", downloadURL);
+            console.log(snapshot);
             try {
               const values = await form.validateFields();
               values.patientProfileID = Number(patientId);

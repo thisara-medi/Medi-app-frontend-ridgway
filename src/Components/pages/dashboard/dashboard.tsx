@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Card, Row, Col } from "antd";
+import  { useEffect, useState } from "react";
+import { Row, Col } from "antd";
 import ReportSummeryCard from "../../custom-components/ReportSummeryCard";
 import { useDashboardStore } from "../../../stores/DashBoardStore"; // Update with the correct path
 
 function Dashboard() {
-  const [loading, setLoading] = useState(true);
   const [totalPatients, setTotalPatients] = useState(0);
   const [newPatientsToday, setnewPatientsToday] = useState(0);
   const [newPatientsThisWeek, setnewPatientsThisWeek] = useState(0);
   const [activePatients, setactivePatients] = useState(0);
 
-  const { fetchData, isLoading } = useDashboardStore();
+  const { fetchData, } = useDashboardStore();
+
+ 
 
   useEffect(() => {
     getDashboardStats();
