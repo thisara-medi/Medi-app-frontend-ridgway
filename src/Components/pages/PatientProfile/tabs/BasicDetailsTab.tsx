@@ -50,6 +50,7 @@ function BasicDetailsTab() {
           insuranceInfomation: apiResponse?.insuranceInfomation,
           medicalHistory: apiResponse?.medicalHistory,
           allergic: apiResponse?.allergic,
+          isActive: apiResponse?.isActive
         });
       } catch (error) {
         console.error("Error fetching data:", error);

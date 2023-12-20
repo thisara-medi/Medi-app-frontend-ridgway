@@ -95,7 +95,9 @@ function EditRecord(initialFormData: RecordData) {
               values.patientProfileID = patientId;
               values.patientMedicalRecordID = Number(recordId);
               values.patientTypeID = Number(values.patientTypeID);
+              if(downloadURL){
               values.fiepath = downloadURL;
+              }
               values.createdDate = new Date().toISOString();
               await recordsStore.updateThunk(values);
               //navigate("patient-Management");
@@ -111,6 +113,23 @@ function EditRecord(initialFormData: RecordData) {
         .catch((error) => {
           console.error("Error uploading file:", error.message);
         });
+        
+    }
+    else {
+      try {
+        const values = await form.validateFields();
+        // Call the updateThunk method from the Zustand store to update the record
+        values.patientProfileID = patientId;
+        values.patientMedicalRecordID = Number(recordId);
+        await recordsStore.updateThunk(values);
+        navigate(-1);
+        notification.success({
+          message: "Record updated successfully",
+          description: "The Record has been successfully updated.",
+        });
+      } catch (error) {
+        console.error("Error updating record:", error);
+      }
     }
   };
 
@@ -133,6 +152,12 @@ function EditRecord(initialFormData: RecordData) {
                         wrapperCol={{ style: { width: "96%" } }}
                         labelAlign="left"
                         colon={false}
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please Enter BHT",
+                          },
+                        ]}
                       >
                         <Input />
                       </Form.Item>
