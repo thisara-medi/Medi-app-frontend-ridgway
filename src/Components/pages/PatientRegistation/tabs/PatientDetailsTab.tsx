@@ -84,6 +84,9 @@ function PatientDetails() {
             form={form}
             layout="vertical"
             onFinish={onFinish}
+            initialValues={{
+              Gender: 'Male', // Set the default value for the Gender field
+            }}
           >
             <div>
               <h4>Personal Infomation</h4>
@@ -383,7 +386,8 @@ function PatientDetails() {
             {" "}
             {/* Add a Row here for the right side content */}
             <Col md={24}>
-              <Form name="UploadImage" layout="vertical" hidden={true}>
+              <Form name="UploadImage" layout="vertical" hidden={true}
+              >
                 <Form.Item
                   label="Profile Picture"
                   name="dragger"
