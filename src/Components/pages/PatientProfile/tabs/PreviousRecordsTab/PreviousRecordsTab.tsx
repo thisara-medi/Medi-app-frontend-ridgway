@@ -17,7 +17,7 @@ function PreviousRecordsTab() {
           padding: 10,
         }}
       >
-        <Search placeholder="Search by Name/ID/NIC" style={{ width: 200 }} />
+       
         <div
           style={{
             display: "flex",
