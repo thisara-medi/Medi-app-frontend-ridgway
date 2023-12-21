@@ -5,6 +5,8 @@ import {
   SettingOutlined,
   UserOutlined,
   QuestionCircleOutlined,
+  FileDoneOutlined,
+  DashboardOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme } from "antd";
 import PmsLogo from "../assets/logo-temp.png";
@@ -39,19 +41,25 @@ function MainLayout() {
           items={[
             {
               key: "1",
-              icon: <UserOutlined />,
+              icon: <DashboardOutlined />,
               label: "Dashboard",
               onClick: () => navigate("/"),
             },
             {
               key: "2",
               icon: <UserOutlined />,
+              label: "Register New Patient",
+              onClick: () => navigate("/patient-registration"),
+            },
+            {
+              key: "3",
+              icon: <UserOutlined />,
               label: "Patient Management",
               onClick: () => navigate("/PatientManagement"),
             },
             {
-              key: "3",
-              icon: <QuestionCircleOutlined />,
+              key: "4",
+              icon: <FileDoneOutlined/>,
               label: "Patient Reports",
               onClick: () => navigate("/patient-reports"),
             },
