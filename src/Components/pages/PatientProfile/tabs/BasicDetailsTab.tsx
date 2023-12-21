@@ -384,9 +384,10 @@ function BasicDetailsTab() {
             {" "}
             {/* Add a Row here for the right side content */}
             <Col md={24}>
-              <Card
+              <Card 
                 bordered={false}
                 style={{ marginLeft: 20, textAlign: "center" }}
+                hidden={true}
               >
                 <Space direction="vertical" style={{ textAlign: "center" }}>
                   <h3>Profile Photo</h3>
