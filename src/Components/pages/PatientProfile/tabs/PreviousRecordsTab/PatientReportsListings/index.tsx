@@ -34,6 +34,19 @@ const columns = [
     dataIndex: "diagnosis",
   },
   {
+    title: "Medical Record",
+    dataIndex: "fiepath",
+    render: (text: any) =>
+      text ? (
+        <a href={text} target="_blank">
+          Download file
+        </a>
+      ) : (
+        ""
+      ),
+    // <a href={text}>Download file</a>
+  },
+  {
     title: "investigations",
     dataIndex: "investigations",
   },
@@ -74,6 +87,7 @@ const PatientReportsListing = (props: ListingPropTypes) => {
               wardNumber: record.wardNumber,
               bhtNumber: record.bhtNumber,
               diagnosis: record.diagnosis,
+              fiepath: record.fiepath,
               investigations: record.investigations, //TODO : replace this
               treatments: record.treatments,
               plan: record.plan,
@@ -115,10 +129,6 @@ const PatientReportsListing = (props: ListingPropTypes) => {
             dataSource={data}
             pagination={{ pageSize: 10 }}
             scroll={{ x: 1800 }}
-            onRow={(record: any) => ({
-              onClick: () =>
-                navigate(`/patient-profile/records/${id}/${record.key}`),
-            })}
           />
         </Space>
       </React.Fragment>

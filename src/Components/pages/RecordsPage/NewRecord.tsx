@@ -76,7 +76,9 @@ function NewRecord(initialFormData: RecordData) {
               values.patientProfileID = Number(patientId);
               values.patientTypeID = Number(values.patientTypeID);
               values.createdDate = new Date().toISOString();
-              values.medicalRecordUrl = downloadURL;
+              if(downloadURL){
+              values.Fiepath = downloadURL;
+              }
               console.log(values);
               await recordsStore.addThunk(values);
               navigate("/PatientManagement");

@@ -383,7 +383,7 @@ function PatientDetails() {
             {" "}
             {/* Add a Row here for the right side content */}
             <Col md={24}>
-              <Form name="UploadImage" layout="vertical">
+              <Form name="UploadImage" layout="vertical" hidden={true}>
                 <Form.Item
                   label="Profile Picture"
                   name="dragger"

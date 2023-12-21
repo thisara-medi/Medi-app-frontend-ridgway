@@ -25,7 +25,7 @@ function PreviousRecordsTab() {
             alignItems: "center",
           }}
         >
-          <Button size="middle" type="primary" ghost style={{ marginRight: 5 }}>
+          <Button size="middle" type="primary" hidden={true} ghost style={{ marginRight: 5 }}>
             Export
           </Button>
           <Button
