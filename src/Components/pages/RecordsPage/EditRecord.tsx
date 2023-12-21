@@ -95,8 +95,12 @@ function EditRecord(initialFormData: RecordData) {
               values.patientProfileID = patientId;
               values.patientMedicalRecordID = Number(recordId);
               values.patientTypeID = Number(values.patientTypeID);
-              if(downloadURL){
-              values.fiepath = downloadURL;
+              if(file){
+              values.Fiepath = downloadURL;
+              }
+              else
+              {
+                values.Fiepath= record.fiepath
               }
               values.createdDate = new Date().toISOString();
               await recordsStore.updateThunk(values);
@@ -121,6 +125,7 @@ function EditRecord(initialFormData: RecordData) {
         // Call the updateThunk method from the Zustand store to update the record
         values.patientProfileID = patientId;
         values.patientMedicalRecordID = Number(recordId);
+        values.Fiepath= record.fiepath
         await recordsStore.updateThunk(values);
         navigate("/");
         notification.success({
