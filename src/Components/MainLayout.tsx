@@ -5,6 +5,7 @@ import {
   UserOutlined,
   FileDoneOutlined,
   DashboardOutlined,
+  UserAddOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme } from "antd";
 import PmsLogo from "../assets/logo-temp.png";
@@ -45,7 +46,7 @@ function MainLayout() {
             },
             {
               key: "2",
-              icon: <UserOutlined />,
+              icon: <UserAddOutlined />,
               label: "Register New Patient",
               onClick: () => navigate("/patient-registration"),
             },
