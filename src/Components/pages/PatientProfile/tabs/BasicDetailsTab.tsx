@@ -50,7 +50,7 @@ function BasicDetailsTab() {
           insuranceInfomation: apiResponse?.insuranceInfomation,
           medicalHistory: apiResponse?.medicalHistory,
           allergic: apiResponse?.allergic,
-          isActive: apiResponse?.isActive
+          isActive: apiResponse?.isActive,
         });
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -77,7 +77,7 @@ function BasicDetailsTab() {
       insuranceInfomation: values?.insuranceInfomation,
       MedicalHistory: values?.medicalHistory,
       Allergic: values?.allergic,
-      isActive: values?.isActive
+      isActive: values?.isActive,
     });
     navigate("/patientManagement");
     notification.success({
@@ -196,6 +196,7 @@ function BasicDetailsTab() {
                     <Form.Item
                       label="Active Patient"
                       name="isActive"
+                      valuePropName="checked"
                       labelCol={{ style: formItemLabelStyle }}
                       wrapperCol={{ style: { width: "96%" } }}
                       labelAlign="left"
