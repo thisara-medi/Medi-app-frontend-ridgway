@@ -6,12 +6,13 @@ import { getStorage } from 'firebase/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCleVew1HeiBQ0Yilf5-2-gqX-2Vp8h5hQ",
-    authDomain: "test-file-upload-114c5.firebaseapp.com",
-    projectId: "test-file-upload-114c5",
-    storageBucket: "test-file-upload-114c5.appspot.com",
-    messagingSenderId: "301259766592",
-    appId: "1:301259766592:web:f706e9dc603fa03e4958a5"
+    apiKey: "AIzaSyC9RiRncpaG8dbQXt4l8uR9Htty-21AC7w",
+    authDomain: "medi-app-ridgway.firebaseapp.com",
+    projectId: "medi-app-ridgway",
+    storageBucket: "medi-app-ridgway.appspot.com",
+    messagingSenderId: "887195212873",
+    appId: "1:887195212873:web:3a8e6d350e9294561f7398",
+    measurementId: "G-YBWHQ9N9N5"
 };
 
 // Initialize Firebase
