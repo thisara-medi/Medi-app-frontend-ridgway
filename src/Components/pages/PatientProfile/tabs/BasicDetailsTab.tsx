@@ -29,7 +29,7 @@ function BasicDetailsTab() {
   const [form] = Form.useForm();
   const { id } = useParams();
   const { getByIdThunk, updateThunk } = usePatientsStore();
-  const [patient, setPatient] = useState<Partial<Patient>>({});
+  const [, setPatient] = useState<Partial<Patient>>({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -60,18 +60,7 @@ function BasicDetailsTab() {
     getData();
   }, []);
 
-  const formatDob = () => {
-    if (patient.dateOfBirth) {
-      const datetimeString = String(patient.dateOfBirth);
-      const formattedDate = new Date(datetimeString)
-        .toISOString()
-        .split("T")[0];
-
-      return formattedDate;
-    } else {
-      return "";
-    }
-  };
+  
 
   const onFinish = async (values: any) => {
     await updateThunk({

@@ -14,7 +14,6 @@ import {
 } from "../../../../stores/PatientRecordStore";
 import React from "react";
 import { PatientType } from "../../../../enums/patientTypeEnum";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 const formItemLabelStyle: React.CSSProperties = {
   padding: 0,

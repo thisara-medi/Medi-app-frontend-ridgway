@@ -3,9 +3,7 @@ import {
   Col,
   Input,
   Row,
-  DatePicker,
   Button,
-  Switch,
   Select,
   Card,
   notification,
@@ -16,13 +14,11 @@ import {
   RecordData,
 } from "../../../stores/PatientRecordStore";
 import React, { useEffect, useState } from "react";
-import { PatientType } from "../../../enums/patientTypeEnum";
 import { useNavigate, useParams } from "react-router-dom";
-import moment from "moment";
 import { storage } from "../../../lib/FirebaseService";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const { Option } = Select;
+const { } = Select;
 const { TextArea } = Input;
 
 const formItemLabelStyle: React.CSSProperties = {
@@ -39,6 +35,7 @@ function EditRecord(initialFormData: RecordData) {
   const [record, setRecord] = useState<Partial<RecordData>>({});
   const navigate = useNavigate();
   const [file, setFile] = useState<File | null>(null);
+  console.log(record);
 
   useEffect(() => {
     let getData = async () => {
@@ -88,6 +85,7 @@ function EditRecord(initialFormData: RecordData) {
         .then((snapshot) => {
           getDownloadURL(storageRef).then(async (downloadURL) => {
             console.log("File available at", downloadURL);
+            console.log(snapshot);
 
             try {
               const values = await form.validateFields();

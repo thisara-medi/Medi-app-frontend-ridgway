@@ -1,5 +1,5 @@
-import { Avatar, Badge, Col, Row, Typography, Dropdown } from "antd";
-import { BellOutlined, UserOutlined, DownOutlined } from "@ant-design/icons";
+import { Avatar, Col, Row, Typography, Dropdown } from "antd";
+import { UserOutlined, DownOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../stores/AuthStore";
