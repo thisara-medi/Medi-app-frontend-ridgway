@@ -164,7 +164,7 @@ function EditRecord(initialFormData: RecordData) {
                           },
                         ]}
                       >
-                        <Input />
+                        <Input disabled={true} />
                       </Form.Item>
                     </Col>
                     <Col md={12}>
@@ -176,7 +176,7 @@ function EditRecord(initialFormData: RecordData) {
                         labelAlign="left"
                         colon={false}
                       >
-                        <Input />
+                         <Input disabled={true} />
                       </Form.Item>
                     </Col>
                   </Row>
