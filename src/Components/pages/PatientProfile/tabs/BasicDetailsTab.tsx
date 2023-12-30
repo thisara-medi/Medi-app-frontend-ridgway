@@ -69,7 +69,6 @@ function BasicDetailsTab() {
       LastName: values?.lastName,
       DateOfBirth: values?.DateOfBirth,
       Gender: values?.gender,
-      nic: values?.nic,
       ContactNumber: values?.contactNumber,
       Address: values?.address,
       EmergencyContactNo: values?.emergencyContactNo,
@@ -171,29 +170,6 @@ function BasicDetailsTab() {
                 <Row>
                   <Col md={12}>
                     <Form.Item
-                      label="NIC(National Identity Card)"
-                      name="nic"
-                      labelCol={{ style: formItemLabelStyle }}
-                      wrapperCol={{ style: { width: "96%" } }}
-                      labelAlign="left"
-                      colon={false}
-                      rules={[
-                        {
-                          required: false,
-                          message: "Please enter NIC.",
-                        },
-                        {
-                          pattern: /^\d{12}$|^\d{9}[VXvx]$/,
-                          message:
-                            "NIC must be 12 digits or 9 digits with 'V' or 'X'.",
-                        },
-                      ]}
-                    >
-                      <Input placeholder="Please enter patient's NIC" />
-                    </Form.Item>
-                  </Col>
-                  <Col md={12}>
-                    <Form.Item
                       label="Active Patient"
                       name="isActive"
                       valuePropName="checked"
@@ -212,7 +188,7 @@ function BasicDetailsTab() {
                 <Row>
                   <Col md={12}>
                     <Form.Item
-                      label="Contact Number"
+                      label="Guardian Contact Number"
                       name="contactNumber"
                       labelCol={{ style: formItemLabelStyle }}
                       wrapperCol={{ style: { width: "96%" } }}
@@ -342,23 +318,7 @@ function BasicDetailsTab() {
                     </Form.Item>
                   </Col>
                 </Row>
-                <Row>
-                  <Col md={24}>
-                    <Form.Item
-                      label="Allergic"
-                      name="allergic"
-                      labelCol={{ style: formItemLabelStyle }}
-                      wrapperCol={{ style: { width: "98%" } }}
-                      labelAlign="left"
-                      colon={false}
-                    >
-                      <Input.TextArea
-                        rows={4}
-                        placeholder="Please enter patient's allergies (if any)"
-                      />
-                    </Form.Item>
-                  </Col>
-                </Row>
+                
               </Card>
               <div
                 style={{

@@ -26,10 +26,6 @@ const columns = [
     dataIndex: "name",
   },
   {
-    title: "ID",
-    dataIndex: "nic",
-  },
-  {
     title: "Ward Number",
     dataIndex: "wardNumber",
   },
@@ -125,7 +121,6 @@ const PatientReportsListing = (props: ListingPropTypes) => {
             background: record.background,
             diagnosis: record.diagnosis,
             fiepath: record.fiepath,
-            nic: record.patientProfile?.nic,
             investigation: record.investigations,
             treatment: record.treatments,
             plan: record.plan,
@@ -196,7 +191,6 @@ const PatientReportsListing = (props: ListingPropTypes) => {
             background: record.background,
             diagnosis: record.diagnosis,
             fiepath: record.fiepath,
-            nic: record.patientProfile?.nic,
             investigation: record.investigations,
             treatment: record.treatments,
             plan: record.plan,
