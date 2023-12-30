@@ -1,16 +1,18 @@
-import { Card, Button, Input, Row, Col, DatePicker } from "antd";
+import { Card, Button, Input, DatePicker } from "antd";
 import PatientReportsListings from "./PatientReportsListings";
-import ReportSummeryCard from "../../custom-components/ReportSummeryCard";
 import { useState } from "react";
 import type { SearchProps } from "antd/es/input";
 import RecordSearchParamsDto from "../../../stores/RecordSearchParamsDto";
 import { GetFile } from "../../../lib/PatientRecordService";
+import CSVViewerEditor from "./EditExcel/editExcelPopup";
 
 const { Search } = Input;
 const { RangePicker } = DatePicker;
 
 function PatientReports() {
   const [name, setName] = useState("");
+  const [csvViewerVisible, setCSVViewerVisible] = useState(false);
+  const [csvBlob, setCSVBlob] = useState<Blob | null>(null);
   // const { records, getAllRecordsByNameThunk } = useRecordsStore();
   //const [id, setid] = useState("");
 
@@ -30,13 +32,15 @@ function PatientReports() {
       // Make the API call with the search parameters
       const response = await GetFile(params);
 
-      // Rest of the code to create and download the file
+      // Create and store the blob
       const blob = new Blob([response.data], { type: "text/csv" });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "patient_records.csv";
-      a.click();
+      setCSVBlob(blob);
+
+      // Convert Blob to File (assuming you have a default name for the file)
+      const file = new File([blob], "patient_records.csv");
+
+      // Download the file
+      setCSVViewerVisible(true)
     } catch (error) {
       console.error("Error exporting records as CSV:", error);
     }
@@ -83,6 +87,12 @@ function PatientReports() {
           </div>
         </div>
         <PatientReportsListings searchParam={name} />
+         {/* CSV Viewer Modal */}
+      <CSVViewerEditor
+        open={csvViewerVisible}
+        onCancel={() => setCSVViewerVisible(false)}
+        csvFile={csvBlob !== null ? new File([csvBlob], "patient_records.csv") : null}
+      />
       </Card>
     </div>
   );

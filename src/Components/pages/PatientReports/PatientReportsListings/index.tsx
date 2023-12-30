@@ -26,10 +26,6 @@ const columns = [
     dataIndex: "name",
   },
   {
-    title: "ID",
-    dataIndex: "nic",
-  },
-  {
     title: "Ward Number",
     dataIndex: "wardNumber",
   },
@@ -83,6 +79,8 @@ function getRandomDate() {
   return `${year}-${formattedMonth}-${formattedDay}`;
 }
 
+console.log(getRandomDate+"");
+
 function getRandomNumberInRange(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -123,7 +121,6 @@ const PatientReportsListing = (props: ListingPropTypes) => {
             background: record.background,
             diagnosis: record.diagnosis,
             fiepath: record.fiepath,
-            nic: record.patientProfile?.nic,
             investigation: record.investigations,
             treatment: record.treatments,
             plan: record.plan,
@@ -194,7 +191,6 @@ const PatientReportsListing = (props: ListingPropTypes) => {
             background: record.background,
             diagnosis: record.diagnosis,
             fiepath: record.fiepath,
-            nic: record.patientProfile?.nic,
             investigation: record.investigations,
             treatment: record.treatments,
             plan: record.plan,

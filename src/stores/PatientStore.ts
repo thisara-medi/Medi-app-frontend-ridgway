@@ -20,7 +20,6 @@ export type Patient = {
   bloodGroup: string;
   medicalHistory: string;
   allergic: string;
-  nic: string;
   insuranceInfomation: string;
   isActive: boolean;
 };

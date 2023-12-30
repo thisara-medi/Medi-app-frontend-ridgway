@@ -1,8 +1,7 @@
-import { Card, Button, Input} from "antd";
+import { Card, Button,} from "antd";
 import TimeChangeReqListing from "./PatientReportsListings";
 import { useNavigate } from "react-router-dom";
 
-const { Search } = Input;
 
 function PreviousRecordsTab() {
   const navigate = useNavigate();

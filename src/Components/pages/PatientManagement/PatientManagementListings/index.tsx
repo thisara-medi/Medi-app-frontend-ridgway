@@ -72,14 +72,16 @@ const actionButtonsArr = [
     Inactive
   </label>,
 ];
+console.log(actionButtonsArr)
 
 const patientManagementListing = (props: ListingPropTypes) => {
   const { patients, getThunk } = usePatientsStore();
-  const { patientsSearch, getAllPatientsBySearchThunk, removeAllAction } =
+  const { getAllPatientsBySearchThunk } =
     usePatientStoreSearch();
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const tempData: any = [];
+  console.log(patients);
 
   useEffect(() => {
     let getData = async () => {
