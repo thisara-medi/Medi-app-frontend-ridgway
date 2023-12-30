@@ -105,7 +105,6 @@ const patientManagementListing = (props: ListingPropTypes) => {
               dateOfBirth: formattedDate,
               sex: patient.gender,
               address: patient.address,
-              nic: patient.nic,
               contactNumber: patient.contactNumber,
               status: patient.isActive ? (
                 <label
@@ -207,7 +206,6 @@ const patientManagementListing = (props: ListingPropTypes) => {
               dateOfBirth: formattedDate,
               sex: patient.gender,
               address: patient.address,
-              nic: patient.nic,
               contactNumber: patient.contactNumber,
               status: patient.isActive ? (
                 <label

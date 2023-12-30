@@ -27,7 +27,7 @@ const styles = {
 };
 
 const CSVViewerEditor: React.FC<CSVViewerEditorProps> = ({ open, onCancel, csvFile }) => {
-  const [csvData, setCSVData] = useState<string[][]>([]);
+  const [, setCSVData] = useState<string[][]>([]);
   const [editedData, setEditedData] = useState<string[][]>([]);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -87,7 +87,7 @@ const CSVViewerEditor: React.FC<CSVViewerEditorProps> = ({ open, onCancel, csvFi
   const columns: ColumnType<string[]>[] = (editedData[0] || []).map((header, index) => ({
     dataIndex: index.toString(),
     title: header,
-    render: (value: any, record: string[], rowIndex: number) => (
+    render: (value: any, _record: string[], rowIndex: number) => (
       <Input
         value={value}
         onChange={(e) => handleInputChange(e.target.value, rowIndex, index ?? 0)}

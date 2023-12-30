@@ -36,10 +36,6 @@ function PatientReports() {
       const blob = new Blob([response.data], { type: "text/csv" });
       setCSVBlob(blob);
 
-      // Convert Blob to File (assuming you have a default name for the file)
-      const file = new File([blob], "patient_records.csv");
-
-      // Download the file
       setCSVViewerVisible(true)
     } catch (error) {
       console.error("Error exporting records as CSV:", error);
