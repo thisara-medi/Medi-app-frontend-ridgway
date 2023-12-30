@@ -14,6 +14,7 @@ export type Patient = {
   lastName: string;
   dateOfBirth: string;
   gender: string;
+  NIC: string;
   contactNumber: string;
   address: string;
   emergencyContactNo: string;
